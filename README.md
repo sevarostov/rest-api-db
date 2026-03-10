@@ -1,5 +1,15 @@
 ## Rest Api, used to fetch data and save to database, built with Laravel and Mysql using Docker
 
+### PhpAdmin demo access:
+https://pma-mysql-addon-clevercloud-customers.services.clever-cloud.com/index.php
+Host: bvg4cye81r4dkuvuzyfu-mysql.services.clever-cloud.com
+Database Name: bvg4cye81r4dkuvuzyfu
+User: uldktjna3offrzhv
+Password: kjoaTwocWmlOo92M8uCR
+Port: 3306
+
+Tables: stocks, incomes, sales, orders, nms, subjects, categories, warehouses
+
 ## Technical Requirements
 
 [PHP 8.4](https://www.php.net/releases/8.4/en.php)
