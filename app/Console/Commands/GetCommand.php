@@ -3,19 +3,22 @@
 namespace App\Console\Commands;
 
 
+use AllowDynamicProperties;
 use App\Services\ApiService;
 use App\Services\IncomeService;
+use App\Services\SaleService;
 use App\Services\StockService;
 use DateTime;
 use Illuminate\Console\Command;
 use function PHPUnit\Framework\isInstanceOf;
 
-class GetCommand extends Command
+#[AllowDynamicProperties] class GetCommand extends Command
 {
-	public function __construct(StockService $stocksService, IncomeService $incomesService) {
+	public function __construct(StockService $stocksService, IncomeService $incomesService, SaleService $salesService) {
 		parent::__construct();
 		$this->stocksService = $stocksService;
 		$this->incomesService = $incomesService;
+		$this->salesService = $salesService;
 	}
 
 	/**
@@ -39,7 +42,9 @@ class GetCommand extends Command
 		foreach (array_keys(ApiService::ENDPOINTS) as $endpoint) {
 			$subst = substr($endpoint, 0, -1);
 			$service = $this->{$endpoint . "Service"};
-			$dateFrom = new DateTime('2026-03-10');
+			$dateFrom = $endpoint == 'stocks'
+				? new DateTime('2026-03-10')
+				: new DateTime('2021-03-10');
 			$dateTo = new DateTime('2026-03-10');
 
 			if(!isInstanceOf("App\Services\\".$subst."Service", $service)) break;

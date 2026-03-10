@@ -20,7 +20,7 @@ class SaleDto
 		public readonly bool $isSupply,
 		public readonly bool $isRealization,
 		public readonly ?string $promoCodeDiscount,
-		public readonly int $warehouseId,
+		public readonly WarehouseDto $warehouse,
 		public readonly string $countryName,
 		public readonly string $oblastOkrugName,
 		public readonly string $regionName,
@@ -31,9 +31,9 @@ class SaleDto
 		public readonly float $forPay,
 		public readonly float $finishedPrice,
 		public readonly float $priceWithDisc,
-		public readonly int $nmId,
-		public readonly int $subjectId,
-		public readonly int $categoryId,
+		public readonly NmDto $nm,
+		public readonly SubjectDto $subject,
+		public readonly CategoryDto $category,
 		public readonly string $brand,
 		public readonly ?bool $isStorno,
 	) {}
@@ -41,7 +41,12 @@ class SaleDto
 	/**
 	 * @throws DateMalformedStringException
 	 */
-	public static function fromArray(array $data, int $warehouseId, int $subjectId, int $categoryId): self {
+	public static function fromArray(array $data,
+		WarehouseDto $warehouse,
+		SubjectDto $subject,
+		CategoryDto $category,
+		NmDto $nm
+	): self {
 		return new self(
 			gNumber: (string)$data['g_number'],
 			date: new DateTime($data['date']),
@@ -54,7 +59,7 @@ class SaleDto
 			isSupply: (bool)$data['is_supply'],
 			isRealization: (bool)$data['is_realization'],
 			promoCodeDiscount: $data['promo_code_discount'] ?? null,
-			warehouseId: $warehouseId,
+			warehouse: $warehouse,
 			countryName: (string)$data['country_name'],
 			oblastOkrugName: (string)$data['oblast_okrug_name'],
 			regionName: (string)$data['region_name'],
@@ -65,9 +70,9 @@ class SaleDto
 			forPay: (float)$data['for_pay'],
 			finishedPrice: (float)$data['finished_price'],
 			priceWithDisc: (float)$data['price_with_disc'],
-			nmId: (int)$data['nm_id'],
-			subjectId: $subjectId,
-			categoryId: $categoryId,
+			nm: $nm,
+			subject: $subject,
+			category: $category,
 			brand: (string)$data['brand'],
 			isStorno: $data['is_storno'] ?? null,
 		);

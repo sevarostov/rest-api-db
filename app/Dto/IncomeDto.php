@@ -17,7 +17,7 @@ class IncomeDto
 		public readonly int $barcode,
 		public readonly int $quantity,
 		public readonly float $totalPrice,
-		public readonly DateTimeInterface $dateClose,
+		public readonly ?DateTimeInterface $dateClose,
 		public readonly WarehouseDto $warehouse,
 		public readonly NmDto $nm,
 	) {}
@@ -31,7 +31,7 @@ class IncomeDto
 			supplierArticle: (string)$data['supplier_article'],
 			techSize: (string)$data['tech_size'],
 			barcode: (int)$data['barcode'],
-			quantity: (int)$data['quantity'],
+			quantity: isset($data['quantity']) ? (int)$data['quantity'] : 0,
 			totalPrice: (float)$data['total_price'],
 			dateClose: new DateTime($data['date_close']),
 			warehouse: $warehouse,

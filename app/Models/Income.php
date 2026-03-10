@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Model;
  * Расширенная модель с переопределенным Eloquent билдером
  * @mixin EloquentTypeHinting
  *
+ * @property int $id Primary key
  */
 class Income extends Model
 {

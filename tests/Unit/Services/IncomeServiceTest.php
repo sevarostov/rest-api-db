@@ -21,14 +21,14 @@ class IncomeServiceTest extends TestCase
 
 		$this->apiService = new ApiService();
 
-		$this->IncomeRepository = new IncomeRepository();
+		$this->incomeRepository = new IncomeRepository();
 		$this->nmRepository = new NmRepository();
 		$this->warehouseRepository = new WarehouseRepository();
 		$this->incomeService = new IncomeService(
 			$this->apiService,
-			$this->IncomeRepository,
+			$this->incomeRepository,
 			$this->warehouseRepository,
-			$this->nmRepository,
+			$this->nmRepository
 		);
 	}
 
@@ -38,16 +38,8 @@ class IncomeServiceTest extends TestCase
 		$dateTo = new DateTime('2026-03-10');
 
 		$result = $this->incomeService->sync($dateFrom, $dateTo);
-dd($result);
+
 		$this->assertInstanceOf(Collection::class, $result);
 		$this->assertContainsOnlyInstancesOf(IncomeDto::class, $result);
-
-//		$this->assertGreaterThanOrEqual(1, $result->count());
-//
-//		$firstIncome = $result->first();
-//		$this->assertNotNull($firstIncome);
-//		$this->assertIsString($firstIncome->supplierArticle);
-//		$this->assertIsInt($firstIncome->barcode);
-//		$this->assertIsFloat($firstIncome->price);
 	}
 }

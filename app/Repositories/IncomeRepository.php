@@ -7,6 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class IncomeRepository
 {
+	public function updateOrCreate(array $where, array $data): Model
+	{
+		return Income::updateOrCreate($where, $data);
+	}
+
 	public function create(array $data): Model
 	{
 		return Income::create($data);
