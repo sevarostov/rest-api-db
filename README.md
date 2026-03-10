@@ -2,13 +2,15 @@
 
 ### PhpAdmin demo access:
 https://pma-mysql-addon-clevercloud-customers.services.clever-cloud.com/index.php
-Host: bvg4cye81r4dkuvuzyfu-mysql.services.clever-cloud.com
-Database Name: bvg4cye81r4dkuvuzyfu
-User: uldktjna3offrzhv
-Password: kjoaTwocWmlOo92M8uCR
-Port: 3306
 
-Tables: stocks, incomes, sales, orders, nms, subjects, categories, warehouses
+[Host]: bvg4cye81r4dkuvuzyfu-mysql.services.clever-cloud.com
+[Database Name]: bvg4cye81r4dkuvuzyfu
+[User]: uldktjna3offrzhv
+[Password]: kjoaTwocWmlOo92M8uCR
+[Port]: 3306
+
+[Tables]: stocks, incomes, sales, orders, nms, subjects, categories, warehouses
+
 
 ## Technical Requirements
 
