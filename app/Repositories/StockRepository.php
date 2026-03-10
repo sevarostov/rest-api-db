@@ -7,14 +7,14 @@ use Illuminate\Database\Eloquent\Model;
 
 class StockRepository
 {
-	public function updateOrCreate(array $where, array $data): Model
+	public function create(array $data): Model
 	{
-		return Stock::updateOrCreate($where, $data);
+		return Stock::create($data);
 	}
 
-	public function findByNsAndWarehouse(string $ns, string $warehouse): ?Stock
+	public function findByNmAndWarehouse(string $nm, string $warehouse): ?Stock
 	{
-		return Stock::where('ns', $ns)
+		return Stock::where('nm', $nm)
 			->where('warehouse', $warehouse)
 			->first();
 	}

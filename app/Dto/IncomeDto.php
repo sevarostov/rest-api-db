@@ -18,11 +18,11 @@ class IncomeDto
 		public readonly int $quantity,
 		public readonly float $totalPrice,
 		public readonly DateTimeInterface $dateClose,
-		public readonly int $warehouseId,
-		public readonly int $nmId,
+		public readonly WarehouseDto $warehouse,
+		public readonly NmDto $nm,
 	) {}
 
-	public static function fromArray(array $data, int $warehouseId): self {
+	public static function fromArray(array $data, WarehouseDto $warehouse, NmDto $nmDto): self {
 		return new self(
 			incomeId: (int)$data['income_id'],
 			number: $data['number'] ?? null,
@@ -34,8 +34,8 @@ class IncomeDto
 			quantity: (int)$data['quantity'],
 			totalPrice: (float)$data['total_price'],
 			dateClose: new DateTime($data['date_close']),
-			warehouseId: $warehouseId,
-			nmId: (int)$data['nm_id'],
+			warehouse: $warehouse,
+			nm: $nmDto,
 		);
 	}
 }

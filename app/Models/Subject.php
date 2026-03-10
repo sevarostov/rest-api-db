@@ -4,34 +4,24 @@ namespace App\Models;
 
 use EloquentTypeHinting;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Carbon;
 
 /**
  * Расширенная модель с переопределенным Eloquent билдером
  * @mixin EloquentTypeHinting
  *
+ * @property int $id Primary key
+ * @property string $name Subject name
+ * @property Carbon $created_at
+ * @property Carbon|null $updated_at
+ *
  */
-class Stock extends Model
+class Subject extends Model
 {
+	protected $table = 'subjects';
+
 	protected $fillable = [
-		'date',
-		'last_change_date',
-		'supplier_article',
-		'tech_size',
-		'barcode',
-		'quantity',
-		'is_supply',
-		'is_realization',
-		'quantity_full',
-		'warehouse',
-		'in_way_to_client',
-		'in_way_from_client',
-		'nm',
-		'category',
-		'subject',
-		'brand',
-		'sc_code',
-		'price',
-		'discount'
+		'name',
 	];
 
 	protected $casts = [

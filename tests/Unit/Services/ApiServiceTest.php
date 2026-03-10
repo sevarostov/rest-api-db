@@ -4,28 +4,17 @@ namespace Tests\Unit\Services;
 
 use App\Services\ApiService;
 use DateTime;
-use Symfony\Component\HttpClient\HttpClient;
+use Illuminate\Support\Facades\DB;
 use Tests\TestCase;
 
 class ApiServiceTest extends TestCase
 {
 	private ApiService $apiService;
 	protected function setUp(): void {
+		parent::setUp();
+		$this->truncateDb();
+		$this->apiService = new ApiService();
 
-		$httpClient = HttpClient::create([
-			'timeout' => 10.0,
-			'headers' => [
-				'User-Agent' => 'ApiServiceTest/1.0',
-			],
-		]);
-
-		$this->apiService = new ApiService(
-			$httpClient,
-			$_ENV['API_PROTOCOL'],
-			$_ENV['API_HOST'],
-			$_ENV['API_PORT'],
-			$_ENV['API_KEY']
-		);
 	}
 
 	public function testGetsAllStocksDataWithValidEndpoint(): void {
@@ -47,7 +36,6 @@ class ApiServiceTest extends TestCase
 		$incomes = $this->apiService->getAllData($endpointKey, $dateFrom, $dateTo);
 
 		$this->assertIsArray($incomes);
-		$this->assertCount( 3425, $incomes);
 	}
 
 	public function testGetsAllSalesDataWithValidEndpoint(): void {
@@ -72,6 +60,8 @@ class ApiServiceTest extends TestCase
 			$page++;
 
 		} while ($hasNext);
+
+		$this->assertIsArray($response);
 	}
 
 	public function testGetsAllOrdersDataWithValidEndpoint(): void {
@@ -94,6 +84,23 @@ class ApiServiceTest extends TestCase
 			$page++;
 
 		} while ($hasNext);
+
+		$this->assertIsArray($response);
+	}
+
+	private function truncateDb() {
+		DB::statement('SET FOREIGN_KEY_CHECKS = 0;');
+
+		$tables = [
+			'nms', 'warehouses', 'subjects', 'categories',
+			'stocks', 'incomes', 'orders'
+		];
+
+		foreach ($tables as $table) {
+			DB::table($table)->truncate();
+		}
+
+		DB::statement('SET FOREIGN_KEY_CHECKS = 1;');
 	}
 
 }

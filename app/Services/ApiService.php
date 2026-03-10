@@ -2,36 +2,37 @@
 
 namespace App\Services;
 
+use AllowDynamicProperties;
 use DateTimeInterface;
 use Exception;
 use Symfony\Component\HttpClient\Exception\ClientException;
 use Symfony\Component\HttpClient\Exception\ServerException;
+use Symfony\Component\HttpClient\HttpClient;
 use Symfony\Contracts\HttpClient\Exception\ClientExceptionInterface;
 use Symfony\Contracts\HttpClient\Exception\DecodingExceptionInterface;
 use Symfony\Contracts\HttpClient\Exception\RedirectionExceptionInterface;
 use Symfony\Contracts\HttpClient\Exception\ServerExceptionInterface;
 use Symfony\Contracts\HttpClient\Exception\TransportExceptionInterface;
-use Symfony\Contracts\HttpClient\HttpClientInterface;
 
 /**
  * Сервис для получения данных из API (stocks, incomes, sales, orders)
  */
-class ApiService
+#[AllowDynamicProperties] class ApiService
 {
-	private const ENDPOINTS = [
+	public const ENDPOINTS = [
 		'stocks' => '/api/stocks',
 		'incomes' => '/api/incomes',
 		'sales' => '/api/sales',
 		'orders' => '/api/orders',
 	];
 
-	public function __construct(
-		private readonly HttpClientInterface $httpClient,
-		private readonly string $protocol,
-		private readonly string $host,
-		private readonly int $port,
-		private readonly string $apiKey,
-	) {}
+	public function __construct() {
+		$this->httpClient = HttpClient::create();
+		$this->protocol = config('config.API_PROTOCOL') ?? '';
+		$this->host = config('config.API_HOST') ?? '';
+		$this->port = config('config.API_PORT') ?? '';
+		$this->apiKey = config('config.API_KEY') ?? '';
+	}
 
 	/**
 	 * Получает данные по эндпоинту с пагинацией
@@ -88,7 +89,6 @@ class ApiService
 		$page = 1;
 
 		do {
-
 			$response = $this->getData($endpointKey, $dateFrom, $dateTo, $page, $limit);
 			if (!$response || $response['status_code'] !== 200) {
 				break;

@@ -2,7 +2,7 @@
 
 namespace App\Dto;
 
-class NmsDto
+class NmDto
 {
 	public function __construct(
 		public readonly int $nmId,

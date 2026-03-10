@@ -10,28 +10,21 @@ use Illuminate\Database\Eloquent\Model;
  * @mixin EloquentTypeHinting
  *
  */
-class Stock extends Model
+class Income extends Model
 {
 	protected $fillable = [
+		'income_id',
 		'date',
+		'number',
 		'last_change_date',
 		'supplier_article',
 		'tech_size',
 		'barcode',
 		'quantity',
-		'is_supply',
-		'is_realization',
-		'quantity_full',
+		'total_price',
+		'date_close',
 		'warehouse',
-		'in_way_to_client',
-		'in_way_from_client',
 		'nm',
-		'category',
-		'subject',
-		'brand',
-		'sc_code',
-		'price',
-		'discount'
 	];
 
 	protected $casts = [

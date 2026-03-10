@@ -49,10 +49,7 @@ docker exec -i php php artisan migrate
 
 ## Fetch data and save to db
 ````
-docker exec php php artisan stocks:get
-docker exec php php artisan incomes:get
-docker exec php php artisan sales:get
-docker exec php php artisan orders:get
+docker exec php php artisan get
 ````
 
 

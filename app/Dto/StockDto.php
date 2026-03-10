@@ -18,12 +18,12 @@ class StockDto
 		public readonly bool $isSupply,
 		public readonly bool $isRealization,
 		public readonly int $quantityFull,
-		public readonly int $warehouseId,
+		public readonly WarehouseDto $warehouse,
 		public readonly int $inWayToClient,
 		public readonly int $inWayFromClient,
-		public readonly int $nmId,
-		public readonly int $subjectId,
-		public readonly int $categoryId,
+		public readonly NmDto $nm,
+		public readonly SubjectDto $subject,
+		public readonly CategoryDto $category,
 		public readonly string $brand,
 		public readonly int $scCode,
 		public readonly float $price,
@@ -33,7 +33,12 @@ class StockDto
 	/**
 	 * @throws DateMalformedStringException
 	 */
-	public static function fromArray(array $data, int $warehouseId, int $subjectId, int $categoryId): self {
+	public static function fromArray(array $data,
+		WarehouseDto $warehouseDto,
+		SubjectDto $subjectDto,
+		CategoryDto $categoryDto,
+		NmDto $nmDto,
+	): self {
 		return new self(
 			date: new DateTime($data['date']),
 			lastChangeDate: new DateTime($data['last_change_date']),
@@ -44,12 +49,12 @@ class StockDto
 			isSupply: (bool)$data['is_supply'],
 			isRealization: (bool)$data['is_realization'],
 			quantityFull: (int)$data['quantity_full'],
-			warehouseId: $warehouseId,
+			warehouse: $warehouseDto,
 			inWayToClient: (int)$data['in_way_to_client'],
 			inWayFromClient: (int)$data['in_way_from_client'],
-			nmId: (int)$data['nm_id'],
-			subjectId: $subjectId,
-			categoryId: $categoryId,
+			nm: $nmDto,
+			subject: $subjectDto,
+			category: $categoryDto,
 			brand: (string)$data['brand'],
 			scCode: (int)$data['sc_code'],
 			price: (float)$data['price'],
