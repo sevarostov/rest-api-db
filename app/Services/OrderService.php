@@ -47,7 +47,7 @@ class OrderService
 
 		$page = $this->apiPageTrackerService->getTracker('orders')->last_loaded_page ?? 1;
 		$limit = 500;
-		$OrderDtos = collect();
+		$orderDtos = collect();
 		do {
 			$response = $this->apiService->getData('orders', $dateFrom, $dateTo, $page, $limit);
 
@@ -56,9 +56,9 @@ class OrderService
 			}
 
 			$rawStocks = $response['data']['data'] ?? [];
-			$OrderDtos = $this->transformToDtos($rawStocks);
+			$orderDtos = $this->transformToDtos($rawStocks);
 
-			$this->save($OrderDtos);
+			$this->save($orderDtos);
 
 			$hasNext = $response['data']['links']['next'] ?? false;
 			$this->apiPageTrackerService->setPage('orders', $page);
@@ -67,7 +67,7 @@ class OrderService
 		} while ($hasNext);
 
 
-		return $OrderDtos;
+		return $orderDtos;
 	}
 
 	private function transformToDtos(array $rawData): Collection {

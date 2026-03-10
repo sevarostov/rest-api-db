@@ -55,7 +55,7 @@ use function PHPUnit\Framework\isInstanceOf;
 			if (!isInstanceOf("App\Services\\" . $subst . "Service", $service))
 				break;
 			$result = $service->sync($dateFrom, $dateTo);
-			$this->info(sprintf("Successfully stored %s results of endpoint \\'%s'",
+			$this->info(sprintf("Successfully stored %s results of endpoint '%s'",
 				count($result),
 				$endpoint));
 		}
