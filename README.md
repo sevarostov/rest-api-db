@@ -1,8 +1,44 @@
 ## Rest Api, used to fetch data and save to database, built with Laravel and Mysql using Docker
 
-### PhpMyAdmin demo access:
+### MySQL demo access:
 
-PhpMyAdmin: https://pma-mysql-addon-clevercloud-customers.services.clever-cloud.com/index.php
+```bash
+mysql -h bvg4cye81r4dkuvuzyfu-mysql.services.clever-cloud.com -P 3306 -u uldktjna3offrzhv -p bvg4cye81r4dkuvuzyfu
+```
+
+> show tables;
+
+Tables_in_bvg4cye81r4dkuvuzyfu |
++--------------------------------+
+| api_page_trackers              |
+| cache                          |
+| cache_locks                    |
+| categories                     |
+| failed_jobs                    |
+| incomes                        |
+| job_batches                    |
+| jobs                           |
+| migrations                     |
+| nms                            |
+| orders                         |
+| password_reset_tokens          |
+| sales                          |
+| sessions                       |
+| stocks                         |
+| subjects                       |
+| users                          |
+| warehouses                     |
++--------------------------------+
+
+> select * from stocks;
++------+------------+------------------+------------------+------------------+-----------+----------+-----------+----------------+---------------+-----------+------------------+--------------------+------+---------+----------+------------------+-----------+-----------+----------+---------------------+---------------------+
+| id   | date       | last_change_date | supplier_article | tech_size        | barcode   | quantity | is_supply | is_realization | quantity_full | warehouse | in_way_to_client | in_way_from_client | nm   | subject | category | brand            | sc_code   | price     | discount | created_at          | updated_at          |
++------+------------+------------------+------------------+------------------+-----------+----------+-----------+----------------+---------------+-----------+------------------+--------------------+------+---------+----------+------------------+-----------+-----------+----------+---------------------+---------------------+
+| 3174 | 2026-03-10 | 2025-01-19       | c88c5018511d87a8 | 66e7dff9f98764da | 212416691 |        0 |         0 |              1 |             3 |       134 |                0 |                  3 | 1202 |      50 |        6 | c88460ca41fdbb82 | 149490916 |   3021.00 |    28.00 | 2026-03-10 18:02:22 | 2026-03-10 18:02:22 |
+| 3175 | 2026-03-10 | 2025-01-29       | 1ebc90010e9f0d8c | 66e7dff9f98764da | 942802682 |        0 |         1 |              0 |             1 |       135 |                0 |                  1 | 1203 |      51 |        6 | f486d1bc7ccbbb35 | 413256454 |    662.00 |    25.00 | 2026-03-10 18:02:22 | 2026-03-10 18:02:22 |
+| 3176 | 2026-03-10 | 2025-03-01       | 6b90a7e2b5909076 | 66e7dff9f98764da | 776999398 |        0 |         1 |              0 |             2 |       134 |                0 |
+> 
+
 
 Host: ```bvg4cye81r4dkuvuzyfu-mysql.services.clever-cloud.com```
 
